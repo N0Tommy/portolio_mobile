@@ -20,7 +20,10 @@
       --border: rgba(240,236,228,0.08);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
     body {
       background: var(--bg);
@@ -28,6 +31,7 @@
       font-family: 'Syne', sans-serif;
       overflow-x: hidden;
       cursor: none;
+      max-width: 100vw;
     }
 
     /* CURSOR */
@@ -557,8 +561,10 @@
       border: none;
       cursor: pointer;
       padding: 4px;
-      position: relative;
-      z-index: 101;
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 300;
     }
     .hamburger span {
       display: block;
@@ -570,12 +576,13 @@
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+    /* MOBILE FULLSCREEN MENU */
     .mobile-menu {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(12,11,15,0.98);
-      z-index: 99;
+      z-index: 150;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -592,6 +599,7 @@
       letter-spacing: -0.01em;
       transition: color 0.2s;
     }
+    .mobile-menu a:active,
     .mobile-menu a:hover { color: var(--accent); }
 
     @media (max-width: 768px) {
@@ -606,54 +614,56 @@
 
       /* HERO */
       .hero {
-        padding: 100px 24px 64px;
         min-height: 100svh;
+        padding: 100px 24px 64px;
         justify-content: flex-end;
       }
-      .hero::before { width: 300px; height: 300px; top: -50px; right: -50px; }
-      .hero::after  { width: 250px; height: 250px; bottom: 60px; left: 0; }
+      .hero::before { width: 280px; height: 280px; top: -40px; right: -60px; }
+      .hero::after  { width: 220px; height: 220px; bottom: 80px; left: 0; }
       .hero-clock { display: none; }
       .hero-scroll-hint { display: none; }
-      .hero-eyebrow { font-size: 11px; }
-      .hero-title { font-size: clamp(52px, 14vw, 80px); }
+      .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; }
+      .hero-title { font-size: clamp(50px, 13vw, 72px); }
       .hero-title span.subtitle {
-        font-size: 13px;
-        line-height: 1.8;
+        font-size: 12px;
+        line-height: 1.9;
         margin-top: 24px;
         max-width: 100%;
       }
 
-      /* MARQUEE — shrink font on mobile */
-      .marquee-item { font-size: clamp(24px, 6vw, 36px); padding: 0 20px; }
+      /* MARQUEE */
+      .marquee-item { font-size: clamp(22px, 5.5vw, 34px); padding: 0 18px; }
 
       /* HIGHLIGHTS */
-      .highlights-section { padding: 72px 24px; }
+      .highlights-section { padding: 64px 24px; }
       .highlights-grid { grid-template-columns: 1fr; }
       .highlight-item { padding: 36px 28px; }
-      .highlight-number { font-size: clamp(44px, 12vw, 64px); }
+      .highlight-number { font-size: clamp(48px, 13vw, 68px); }
+      .highlight-desc { max-width: 100%; }
 
       /* ABOUT */
       .about-section {
         grid-template-columns: 1fr;
         gap: 48px;
-        padding: 0 24px 72px;
+        padding: 0 24px 64px;
       }
-      .about-headline { font-size: clamp(32px, 8vw, 48px); }
+      .about-headline { font-size: clamp(30px, 8vw, 44px); }
+      .about-body { font-size: 14px; }
       .tool-row { padding: 16px 0; }
       .tool-name { font-size: 14px; }
       .tool-use  { font-size: 11px; }
 
       /* EXPERIENCE */
-      .experience-section { padding: 0 24px 72px; }
+      .experience-section { padding: 0 24px 64px; }
       .exp-grid { grid-template-columns: 1fr; }
-      .exp-card { padding: 32px 24px; }
+      .exp-card { padding: 28px 24px; }
       .exp-title { font-size: clamp(22px, 6vw, 28px); }
+      .exp-desc { font-size: 13px; }
       .cert-lang-grid { grid-template-columns: 1fr; }
-      .cert-card, .lang-card { padding: 32px 24px; }
-      .cert-date { font-size: 10px; }
+      .cert-card, .lang-card { padding: 28px 24px; }
 
       /* UPCOMING */
-      .upcoming-section { padding: 0 24px 72px; }
+      .upcoming-section { padding: 0 24px 64px; }
       .upcoming-card {
         grid-template-columns: 1fr;
         gap: 28px;
@@ -663,30 +673,28 @@
       .upcoming-desc { font-size: 14px; }
 
       /* BIG MARQUEE */
-      .big-marquee-word { font-size: clamp(48px, 13vw, 80px); padding: 0 24px; }
+      .big-marquee-section { padding: 56px 0; }
+      .big-marquee-word { font-size: clamp(44px, 12vw, 72px); padding: 0 20px; }
 
       /* CONTACT */
       .contact-section { padding: 72px 24px; }
-      .contact-headline { font-size: clamp(32px, 9vw, 56px); margin-bottom: 40px; }
-      .contact-email { font-size: clamp(15px, 4.5vw, 20px); }
+      .contact-headline { font-size: clamp(30px, 9vw, 52px); margin-bottom: 40px; }
+      .contact-email { font-size: clamp(14px, 4vw, 20px); }
 
       /* FOOTER */
-      footer {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 32px 24px;
-      }
+      footer { grid-template-columns: 1fr; gap: 20px; padding: 32px 24px; }
       .footer-social { justify-content: flex-start; gap: 20px; }
       .footer-social a { font-size: 13px; }
 
-      /* SECTION LABEL */
+      /* SECTION LABELS */
       .section-label { margin-bottom: 40px; }
     }
 
-    /* Extra small phones */
+    /* Tiny phones */
     @media (max-width: 380px) {
-      .hero-title { font-size: 46px; }
-      .big-marquee-word { font-size: 42px; }
+      .hero-title { font-size: 44px; }
+      .big-marquee-word { font-size: 38px; }
+      .mobile-menu a { font-size: 38px; }
     }
   </style>
 </head>
@@ -704,12 +712,12 @@
       <li><a href="#upcoming">Next</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- MOBILE MENU -->
+  <!-- MOBILE FULLSCREEN MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" onclick="closeMenu()">Home</a>
     <a href="#experience" onclick="closeMenu()">Experience</a>
@@ -724,7 +732,7 @@
       Thomas<br>
       <span class="line2">Föhn</span>
       <span class="subtitle">
-        Group IT Service Desk Engineer at Komax.<br>
+        ICT specialist & IT Service Desk Enginieer.<br>
         Based in Zug, Switzerland.
       </span>
     </h1>
@@ -935,7 +943,7 @@
   <!-- CONTACT -->
   <section class="contact-section" id="contact">
     <p class="contact-pre">Open to opportunities — get in touch.</p>
-    <h2 class="contact-headline">Let's connect<br>and build something.</h2>
+    <h2 class="contact-headline">Want to work together?<br>Let's connect</h2>
     <a href="https://www.linkedin.com/in/thomasfoehn/" target="_blank" class="contact-email">Message me on LinkedIn →</a>
   </section>
 
