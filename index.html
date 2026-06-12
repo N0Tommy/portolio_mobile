@@ -415,7 +415,23 @@
       gap: 2px; background: var(--border);
       border: 1px solid var(--border); border-top: none;
     }
-    .cert-card, .lang-card { background: var(--bg); padding: 40px; }
+    .cert-card, .lang-card {
+      background: var(--bg); padding: 40px;
+      position: relative; overflow: hidden; transition: background 0.3s;
+    }
+    .cert-card:hover, .lang-card:hover { background: rgba(255,255,255,0.02); }
+    .cert-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: var(--accent3);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .cert-card:hover::before { transform: scaleX(1); }
+    .lang-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: var(--accent2);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .lang-card:hover::before { transform: scaleX(1); }
     .cert-item {
       display: flex; justify-content: space-between; align-items: flex-start;
       padding: 18px 0; border-bottom: 1px solid var(--border); gap: 16px;
@@ -453,13 +469,17 @@
       align-items: center;
       position: relative;
       overflow: hidden;
+      transition: background 0.3s;
     }
+    .upcoming-card:hover { background: rgba(255,255,255,0.02); }
     .upcoming-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, var(--accent3), var(--accent2), transparent);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
     }
+    .upcoming-card:hover::before { transform: scaleX(1); }
     .upcoming-label {
       font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent3); margin-bottom: 16px;
@@ -858,17 +878,17 @@
         <div class="exp-tag" style="color:var(--accent3)">Certifications &amp; Education</div>
         <div class="cert-item">
           <div>
-            <div class="cert-name">Google AI Essentials</div>
-            <div class="cert-issuer">Google · Prompt Engineering · Responsible AI · Workplace AI Integration</div>
-          </div>
-          <div class="cert-date">May 2026</div>
-        </div>
-        <div class="cert-item">
-          <div>
             <div class="cert-name">EFZ Diploma — ICT-Fachmann</div>
             <div class="cert-issuer">BBZW Sursee · IT &amp; Technical Support · Information Technology</div>
           </div>
           <div class="cert-date">Jul 2025</div>
+        </div>
+        <div class="cert-item">
+          <div>
+            <div class="cert-name">Google AI Essentials</div>
+            <div class="cert-issuer">Google · Prompt Engineering · Responsible AI · Workplace AI Integration</div>
+          </div>
+          <div class="cert-date">May 2026</div>
         </div>
       </div>
       <div class="lang-card">
@@ -992,12 +1012,12 @@
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
 
     document.querySelectorAll('.highlight-item, .about-headline, .about-body, .tool-row, .exp-card, .cert-card, .lang-card, .upcoming-card, .contact-headline, .contact-pre, .contact-email').forEach((el, i) => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(28px)';
-      el.style.transition = `opacity 0.7s ease ${i * 0.06}s, transform 0.7s ease ${i * 0.06}s`;
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = `opacity 0.45s ease ${i * 0.04}s, transform 0.45s ease ${i * 0.04}s`;
       observer.observe(el);
     });
     // Hamburger menu
