@@ -732,10 +732,12 @@
       <li><a href="#upcoming">Next</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
   </nav>
+
+  <!-- Hamburger lives outside nav so position:fixed works on all mobile browsers -->
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 
   <!-- MOBILE FULLSCREEN MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -747,7 +749,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero-eyebrow">IT Engineer · Creative Explorer · Trilingual</p>
+    <p class="hero-eyebrow">IT Engineer · Google AI Certified · Trilingual</p>
     <h1 class="hero-title">
       Thomas<br>
       <span class="line2">Föhn</span>
